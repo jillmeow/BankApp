@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="jill344" uuid="5d351b83-0e4e-4b6c-a235-7a2f6be3b982">
+      <secret-storage>memory</secret-storage>
+      <user-name>jmirandilla</user-name>
+      <schema-pattern>*.JMIRANDILLA *.SYS *.SYSTEM</schema-pattern>
+      <default-schemas>*.JMIRANDILLA *.SYS *.SYSTEM</default-schemas>
+    </data-source>
+  </component>
+</project>

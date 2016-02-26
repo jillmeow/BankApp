@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="jill344" uuid="5d351b83-0e4e-4b6c-a235-7a2f6be3b982">
+    <database-info product="Oracle" version="Oracle Database 11g Release 11.2.0.2.0 - 64bit Production" jdbc-version="11.2" driver-name="Oracle JDBC driver" driver-version="11.2.0.3.0">
+      <extra-name-characters>$#</extra-name-characters>
+      <identifier-quote-string>&quot;</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="upper" quoted-identifiers="exact"/>
+    <schema name="JMIRANDILLA" catalog=""/>
+    <schema name="SYS" catalog=""/>
+    <schema name="SYSTEM" catalog=""/>
+    <table name="ACCOUNT" schema="JMIRANDILLA" catalog="" type="TABLE">
+      <column name="ACCTNO" sqlType="CHAR" precision="8" scale="0" nullable="false" jdbcType="1"/>
+      <column name="TYPE" sqlType="VARCHAR2" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="BALANCE" sqlType="NUMBER" precision="12" scale="2" nullable="false" jdbcType="3"/>
+      <column name="BCODE" sqlType="CHAR" precision="9" scale="0" nullable="true" jdbcType="1"/>
+      <column name="BNUM" sqlType="CHAR" precision="9" scale="0" nullable="true" jdbcType="1"/>
+      <primary-key name="SYS_C00910757" columns="ACCTNO"/>
+      <foreign-key name="SYS_C00910758" columns="BCODE" ref-table="BANK" ref-schema="JMIRANDILLA" ref-catalog="" ref-columns="ROUTINGCODE" update-rule="0" delete-rule="1" deferrability="2"/>
+      <foreign-key name="SYS_C00910760" columns="BCODE,BNUM" ref-table="BANK_BRANCH" ref-schema="JMIRANDILLA" ref-catalog="" ref-columns="BRCODE,BRANCHNO" update-rule="0" delete-rule="1" deferrability="2"/>
+      <exported-key name="SYS_C00910762" table="ACCOUNT_CUSTOMER" schema="JMIRANDILLA" catalog="" columns="ANUM"/>
+    </table>
+    <table name="ACCOUNT_CUSTOMER" schema="JMIRANDILLA" catalog="" type="TABLE">
+      <column name="ANUM" sqlType="CHAR" precision="8" scale="0" nullable="false" jdbcType="1"/>
+      <column name="IRDNUM" sqlType="CHAR" precision="9" scale="0" nullable="false" jdbcType="1"/>
+      <primary-key name="SYS_C00910761" columns="ANUM,IRDNUM"/>
+      <foreign-key name="SYS_C00910762" columns="ANUM" ref-table="ACCOUNT" ref-schema="JMIRANDILLA" ref-catalog="" ref-columns="ACCTNO" update-rule="0" delete-rule="1" deferrability="2"/>
+      <foreign-key name="SYS_C00910763" columns="IRDNUM" ref-table="CUSTOMER" ref-schema="JMIRANDILLA" ref-catalog="" ref-columns="IRD" update-rule="0" delete-rule="1" deferrability="2"/>
+    </table>
+    <table name="BANK" schema="JMIRANDILLA" catalog="" type="TABLE">
+      <column name="ROUTINGCODE" sqlType="CHAR" precision="9" scale="0" nullable="false" jdbcType="1"/>
+      <column name="NAME" sqlType="VARCHAR2" precision="15" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ADDR" sqlType="VARCHAR2" precision="40" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="SYS_C00910747" columns="ROUTINGCODE"/>
+      <exported-key name="SYS_C00910758" table="ACCOUNT" schema="JMIRANDILLA" catalog="" columns="BCODE"/>
+      <exported-key name="SYS_C00910751" table="BANK_BRANCH" schema="JMIRANDILLA" catalog="" columns="BRCODE"/>
+      <exported-key name="SYS_C00910768" table="LOAN" schema="JMIRANDILLA" catalog="" columns="BCODE"/>
+    </table>
+    <table name="BANK_BRANCH" schema="JMIRANDILLA" catalog="" type="TABLE">
+      <column name="BRCODE" sqlType="CHAR" precision="9" scale="0" nullable="false" jdbcType="1"/>
+      <column name="BRANCHNO" sqlType="CHAR" precision="9" scale="0" nullable="false" jdbcType="1"/>
+      <column name="BRANCH_NAME" sqlType="VARCHAR2" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="BRANCH_ADDR" sqlType="VARCHAR2" precision="40" scale="0" nullable="true" jdbcType="12"/>
+      <column name="TOTAL_LOAN" sqlType="NUMBER" precision="12" scale="2" nullable="true" jdbcType="3" def="MA=="/>
+      <primary-key name="SYS_C00910749" columns="BRCODE,BRANCHNO"/>
+      <foreign-key name="SYS_C00910751" columns="BRCODE" ref-table="BANK" ref-schema="JMIRANDILLA" ref-catalog="" ref-columns="ROUTINGCODE" update-rule="0" delete-rule="1" deferrability="2"/>
+      <exported-key name="SYS_C00910760" table="ACCOUNT" schema="JMIRANDILLA" catalog="" columns="BCODE,BNUM"/>
+      <exported-key name="SYS_C00910770" table="LOAN" schema="JMIRANDILLA" catalog="" columns="BCODE,BNUM"/>
+      <index name="SYS_C00910750" unique="true" columns="BRANCHNO"/>
+    </table>
+    <table name="CUSTOMER" schema="JMIRANDILLA" catalog="" type="TABLE">
+      <column name="IRD" sqlType="CHAR" precision="9" scale="0" nullable="false" jdbcType="1"/>
+      <column name="NAME" sqlType="VARCHAR2" precision="15" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ADDR" sqlType="VARCHAR2" precision="40" scale="0" nullable="true" jdbcType="12"/>
+      <column name="PHONE" sqlType="VARCHAR2" precision="10" scale="0" nullable="true" jdbcType="12"/>
+      <column name="TOTALBALANCE" sqlType="NUMBER" precision="12" scale="2" nullable="false" jdbcType="3"/>
+      <primary-key name="SYS_C00910754" columns="IRD"/>
+      <exported-key name="SYS_C00910763" table="ACCOUNT_CUSTOMER" schema="JMIRANDILLA" catalog="" columns="IRDNUM"/>
+      <exported-key name="SYS_C00910773" table="LOAN_CUSTOMER" schema="JMIRANDILLA" catalog="" columns="IRDNUM"/>
+    </table>
+    <table name="CUSTOMERS" schema="JMIRANDILLA" catalog="" type="TABLE">
+      <column name="CNUM" sqlType="NUMBER" precision="38" scale="0" nullable="false" jdbcType="3"/>
+      <column name="CNAME" sqlType="VARCHAR2" precision="12" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CITY" sqlType="VARCHAR2" precision="15" scale="0" nullable="true" jdbcType="12"/>
+      <column name="RATING" sqlType="NUMBER" precision="38" scale="0" nullable="true" jdbcType="3"/>
+      <column name="SNUM" sqlType="NUMBER" precision="38" scale="0" nullable="true" jdbcType="3"/>
+      <primary-key name="SYS_C00889720" columns="CNUM"/>
+    </table>
+    <table name="D1" schema="JMIRANDILLA" catalog="" type="TABLE">
+      <column name="DNAME" sqlType="VARCHAR2" precision="15" scale="0" nullable="false" jdbcType="12"/>
+      <column name="DNUMBER" sqlType="NUMBER" precision="2" scale="0" nullable="false" jdbcType="3"/>
+      <column name="TOT_SAL" sqlType="NUMBER" precision="12" scale="0" nullable="true" jdbcType="3" def="MA=="/>
+      <primary-key name="SYS_C00910216" columns="DNUMBER"/>
+      <exported-key name="SYS_C00910221" table="E1" schema="JMIRANDILLA" catalog="" columns="DNO"/>
+      <index name="SYS_C00910217" unique="true" columns="DNAME"/>
+    </table>
+    <table name="DEPARTMENT" schema="JMIRANDILLA" catalog="" type="TABLE">
+      <column name="DNAME" sqlType="VARCHAR2" precision="15" scale="0" nullable="false" jdbcType="12"/>
+      <column name="DNUMBER" sqlType="NUMBER" precision="38" scale="0" nullable="false" jdbcType="3"/>
+      <column name="MGRSSN" sqlType="CHAR" precision="9" scale="0" nullable="false" jdbcType="1"/>
+      <column name="MGRSTARTDATE" sqlType="DATE" precision="7" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="SYS_C00889698" columns="DNUMBER"/>
+      <exported-key name="SYS_C00889707" table="DEPT_LOCATIONS" schema="JMIRANDILLA" catalog="" columns="DNUMBER"/>
+      <exported-key name="DNO_CNST" table="EMPLOYEE" schema="JMIRANDILLA" catalog="" columns="DNO"/>
+      <exported-key name="SYS_C00889712" table="PROJECT" schema="JMIRANDILLA" catalog="" columns="DNUM"/>
+      <index name="SYS_C00889699" unique="true" columns="DNAME"/>
+    </table>
+    <table name="DEPENDENT" schema="JMIRANDILLA" catalog="" type="TABLE">
+      <column name="ESSN" sqlType="CHAR" precision="9" scale="0" nullable="false" jdbcType="1"/>
+      <column name="DEPENDENT_NAME" sqlType="VARCHAR2" precision="15" scale="0" nullable="false" jdbcType="12"/>
+      <column name="SEX" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1"/>
+      <column name="BDATE" sqlType="DATE" precision="7" scale="0" nullable="true" jdbcType="93"/>
+      <column name="RELATIONSHIP" sqlType="VARCHAR2" precision="8" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="SYS_C00889717" columns="ESSN,DEPENDENT_NAME"/>
+      <foreign-key name="SYS_C00889718" columns="ESSN" ref-table="EMPLOYEE" ref-schema="JMIRANDILLA" ref-catalog="" ref-columns="SSN" update-rule="0" delete-rule="1" deferrability="2"/>
+    </table>
+    <table name="DEPT" schema="JMIRANDILLA" catalog="" type="TABLE">
+      <column name="DNAME" sqlType="VARCHAR2" precision="15" scale="0" nullable="false" jdbcType="12"/>
+      <column name="DNUMBER" sqlType="NUMBER" precision="38" scale="0" nullable="false" jdbcType="3"/>
+      <primary-key name="SYS_C00824610" columns="DNUMBER"/>
+      <index name="SYS_C00824611" unique="true" columns="DNAME"/>
+    </table>
+    <table name="DEPT_LOCATIONS" schema="JMIRANDILLA" catalog="" type="TABLE">
+      <column name="DNUMBER" sqlType="NUMBER" precision="38" scale="0" nullable="false" jdbcType="3"/>
+      <column name="DLOCATION" sqlType="VARCHAR2" precision="15" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="SYS_C00889706" columns="DNUMBER,DLOCATION"/>
+      <foreign-key name="SYS_C00889707" columns="DNUMBER" ref-table="DEPARTMENT" ref-schema="JMIRANDILLA" ref-catalog="" ref-columns="DNUMBER" update-rule="0" delete-rule="1" deferrability="2"/>
+    </table>
+    <table name="E1" schema="JMIRANDILLA" catalog="" type="TABLE">
+      <column name="FNAME" sqlType="VARCHAR2" precision="15" scale="0" nullable="false" jdbcType="12"/>
+      <column name="SSN" sqlType="CHAR" precision="9" scale="0" nullable="false" jdbcType="1"/>
+      <column name="SALARY" sqlType="NUMBER" precision="6" scale="0" nullable="true" jdbcType="3" version="true"/>
+      <column name="DNO" sqlType="NUMBER" precision="38" scale="0" nullable="false" jdbcType="3" version="true"/>
+      <primary-key name="SYS_C00910220" columns="SSN"/>
+      <foreign-key name="SYS_C00910221" columns="DNO" ref-table="D1" ref-schema="JMIRANDILLA" ref-catalog="" ref-columns="DNUMBER" update-rule="0" delete-rule="1" deferrability="2"/>
+    </table>
+    <table name="EMP" schema="JMIRANDILLA" catalog="" type="TABLE">
+      <column name="FNAME" sqlType="VARCHAR2" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="LNAME" sqlType="VARCHAR2" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="SSN" sqlType="CHAR" precision="9" scale="0" nullable="false" jdbcType="1"/>
+      <column name="SALARY" sqlType="NUMBER" precision="6" scale="0" nullable="true" jdbcType="3"/>
+      <column name="DNO" sqlType="NUMBER" precision="38" scale="0" nullable="false" jdbcType="3"/>
+      <primary-key name="SYS_C00824615" columns="SSN"/>
+    </table>
+    <table name="EMPLOYEE" schema="JMIRANDILLA" catalog="" type="TABLE">
+      <column name="FNAME" sqlType="VARCHAR2" precision="15" scale="0" nullable="false" jdbcType="12"/>
+      <column name="MINIT" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1"/>
+      <column name="LNAME" sqlType="VARCHAR2" precision="15" scale="0" nullable="false" jdbcType="12"/>
+      <column name="SSN" sqlType="CHAR" precision="9" scale="0" nullable="false" jdbcType="1"/>
+      <column name="BDATE" sqlType="DATE" precision="7" scale="0" nullable="true" jdbcType="93"/>
+      <column name="ADDRESS" sqlType="VARCHAR2" precision="30" scale="0" nullable="true" jdbcType="12"/>
+      <column name="SEX" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1"/>
+      <column name="SALARY" sqlType="NUMBER" precision="6" scale="0" nullable="true" jdbcType="3"/>
+      <column name="SUPERSSN" sqlType="CHAR" precision="9" scale="0" nullable="true" jdbcType="1"/>
+      <column name="DNO" sqlType="NUMBER" precision="38" scale="0" nullable="false" jdbcType="3"/>
+      <primary-key name="SYS_C00889703" columns="SSN"/>
+      <foreign-key name="DNO_CNST" columns="DNO" ref-table="DEPARTMENT" ref-schema="JMIRANDILLA" ref-catalog="" ref-columns="DNUMBER" update-rule="0" delete-rule="1" deferrability="2"/>
+      <foreign-key name="SUPERSSN_CNST" columns="SUPERSSN" ref-table="EMPLOYEE" ref-schema="JMIRANDILLA" ref-catalog="" ref-columns="SSN" update-rule="0" delete-rule="1" deferrability="2"/>
+      <exported-key name="SYS_C00889718" table="DEPENDENT" schema="JMIRANDILLA" catalog="" columns="ESSN"/>
+      <exported-key name="SUPERSSN_CNST" table="EMPLOYEE" schema="JMIRANDILLA" catalog="" columns="SUPERSSN"/>
+      <exported-key name="SYS_C00889715" table="WORKS_ON" schema="JMIRANDILLA" catalog="" columns="ESSN"/>
+    </table>
+    <table name="LAB2A" schema="JMIRANDILLA" catalog="" type="TABLE">
+      <column name="I" sqlType="NUMBER" precision="38" scale="0" nullable="true" jdbcType="3"/>
+      <column name="R" sqlType="NUMBER" precision="6" scale="2" nullable="true" jdbcType="3"/>
+      <column name="TXT" sqlType="VARCHAR2" precision="20" scale="0" nullable="true" jdbcType="12"/>
+      <column name="WHEN" sqlType="DATE" precision="7" scale="0" nullable="true" jdbcType="93"/>
+    </table>
+    <table name="LAB3A" schema="JMIRANDILLA" catalog="" type="TABLE">
+      <column name="CURRENTDATE" sqlType="DATE" precision="7" scale="0" nullable="true" jdbcType="93"/>
+      <column name="DATEANDTIME" sqlType="TIMESTAMP(6)" precision="11" scale="6" nullable="true" jdbcType="93"/>
+    </table>
+    <table name="LOAN" schema="JMIRANDILLA" catalog="" type="TABLE">
+      <column name="LOANNO" sqlType="CHAR" precision="10" scale="0" nullable="false" jdbcType="1"/>
+      <column name="TYPE" sqlType="VARCHAR2" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="AMOUNT" sqlType="NUMBER" precision="12" scale="2" nullable="false" jdbcType="3" version="true"/>
+      <column name="CONTRACT_DATE" sqlType="DATE" precision="7" scale="0" nullable="false" jdbcType="93"/>
+      <column name="BCODE" sqlType="CHAR" precision="9" scale="0" nullable="true" jdbcType="1" version="true"/>
+      <column name="BNUM" sqlType="CHAR" precision="9" scale="0" nullable="true" jdbcType="1" version="true"/>
+      <primary-key name="SYS_C00910767" columns="LOANNO"/>
+      <foreign-key name="SYS_C00910768" columns="BCODE" ref-table="BANK" ref-schema="JMIRANDILLA" ref-catalog="" ref-columns="ROUTINGCODE" update-rule="0" delete-rule="1" deferrability="2"/>
+      <foreign-key name="SYS_C00910770" columns="BCODE,BNUM" ref-table="BANK_BRANCH" ref-schema="JMIRANDILLA" ref-catalog="" ref-columns="BRCODE,BRANCHNO" update-rule="0" delete-rule="1" deferrability="2"/>
+      <exported-key name="SYS_C00910772" table="LOAN_CUSTOMER" schema="JMIRANDILLA" catalog="" columns="LNUM"/>
+    </table>
+    <table name="LOAN_CUSTOMER" schema="JMIRANDILLA" catalog="" type="TABLE">
+      <column name="LNUM" sqlType="CHAR" precision="10" scale="0" nullable="false" jdbcType="1"/>
+      <column name="IRDNUM" sqlType="CHAR" precision="9" scale="0" nullable="false" jdbcType="1"/>
+      <primary-key name="SYS_C00910771" columns="LNUM,IRDNUM"/>
+      <foreign-key name="SYS_C00910773" columns="IRDNUM" ref-table="CUSTOMER" ref-schema="JMIRANDILLA" ref-catalog="" ref-columns="IRD" update-rule="0" delete-rule="1" deferrability="2"/>
+      <foreign-key name="SYS_C00910772" columns="LNUM" ref-table="LOAN" ref-schema="JMIRANDILLA" ref-catalog="" ref-columns="LOANNO" update-rule="0" delete-rule="1" deferrability="2"/>
+    </table>
+    <table name="ORDERS" schema="JMIRANDILLA" catalog="" type="TABLE">
+      <column name="ONUM" sqlType="NUMBER" precision="38" scale="0" nullable="false" jdbcType="3"/>
+      <column name="AMT" sqlType="NUMBER" precision="8" scale="2" nullable="true" jdbcType="3"/>
+      <column name="ODATE" sqlType="DATE" precision="7" scale="0" nullable="true" jdbcType="93"/>
+      <column name="CNUM" sqlType="NUMBER" precision="38" scale="0" nullable="true" jdbcType="3"/>
+      <column name="SNUM" sqlType="NUMBER" precision="38" scale="0" nullable="true" jdbcType="3"/>
+      <primary-key name="SYS_C00889721" columns="ONUM"/>
+    </table>
+    <table name="PROJECT" schema="JMIRANDILLA" catalog="" type="TABLE">
+      <column name="PNAME" sqlType="VARCHAR2" precision="15" scale="0" nullable="false" jdbcType="12"/>
+      <column name="PNUMBER" sqlType="NUMBER" precision="38" scale="0" nullable="false" jdbcType="3"/>
+      <column name="PLOCATION" sqlType="VARCHAR2" precision="15" scale="0" nullable="true" jdbcType="12"/>
+      <column name="DNUM" sqlType="NUMBER" precision="38" scale="0" nullable="false" jdbcType="3"/>
+      <primary-key name="SYS_C00889710" columns="PNUMBER"/>
+      <foreign-key name="SYS_C00889712" columns="DNUM" ref-table="DEPARTMENT" ref-schema="JMIRANDILLA" ref-catalog="" ref-columns="DNUMBER" update-rule="0" delete-rule="1" deferrability="2"/>
+      <exported-key name="SYS_C00889716" table="WORKS_ON" schema="JMIRANDILLA" catalog="" columns="PNO"/>
+      <index name="SYS_C00889711" unique="true" columns="PNAME"/>
+    </table>
+    <table name="SALESPEOPLE" schema="JMIRANDILLA" catalog="" type="TABLE">
+      <column name="SNUM" sqlType="NUMBER" precision="38" scale="0" nullable="false" jdbcType="3"/>
+      <column name="SNAME" sqlType="VARCHAR2" precision="10" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CITY" sqlType="VARCHAR2" precision="15" scale="0" nullable="true" jdbcType="12"/>
+      <column name="COMM" sqlType="NUMBER" precision="4" scale="2" nullable="true" jdbcType="3"/>
+      <primary-key name="SYS_C00889719" columns="SNUM"/>
+    </table>
+    <table name="TEST_X" schema="JMIRANDILLA" catalog="" type="TABLE">
+      <column name="I" sqlType="NUMBER" precision="38" scale="0" nullable="true" jdbcType="3"/>
+      <column name="N" sqlType="NUMBER" precision="0" scale="-127" nullable="true" jdbcType="3"/>
+      <column name="R" sqlType="NUMBER" precision="8" scale="2" nullable="true" jdbcType="3"/>
+      <column name="C" sqlType="VARCHAR2" precision="10" scale="0" nullable="true" jdbcType="12"/>
+      <column name="D" sqlType="DATE" precision="7" scale="0" nullable="true" jdbcType="93"/>
+    </table>
+    <table name="WORKS_ON" schema="JMIRANDILLA" catalog="" type="TABLE">
+      <column name="ESSN" sqlType="CHAR" precision="9" scale="0" nullable="false" jdbcType="1"/>
+      <column name="PNO" sqlType="NUMBER" precision="38" scale="0" nullable="false" jdbcType="3"/>
+      <column name="HOURS" sqlType="NUMBER" precision="4" scale="1" nullable="false" jdbcType="3"/>
+      <primary-key name="SYS_C00889714" columns="ESSN,PNO"/>
+      <foreign-key name="SYS_C00889715" columns="ESSN" ref-table="EMPLOYEE" ref-schema="JMIRANDILLA" ref-catalog="" ref-columns="SSN" update-rule="0" delete-rule="1" deferrability="2"/>
+      <foreign-key name="SYS_C00889716" columns="PNO" ref-table="PROJECT" ref-schema="JMIRANDILLA" ref-catalog="" ref-columns="PNUMBER" update-rule="0" delete-rule="1" deferrability="2"/>
+    </table>
+    <table name="XYZ" schema="JMIRANDILLA" catalog="" type="TABLE">
+      <column name="I" sqlType="NUMBER" precision="38" scale="0" nullable="true" jdbcType="3"/>
+      <column name="S" sqlType="VARCHAR2" precision="20" scale="0" nullable="true" jdbcType="12"/>
+      <column name="D" sqlType="DATE" precision="7" scale="0" nullable="true" jdbcType="93"/>
+    </table>
+    <table name="HELP" schema="SYSTEM" catalog="" type="TABLE">
+      <column name="TOPIC" sqlType="VARCHAR2" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="SEQ" sqlType="NUMBER" precision="0" scale="-127" nullable="false" jdbcType="3"/>
+      <column name="INFO" sqlType="VARCHAR2" precision="80" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="HELP_TOPIC_SEQ" columns="TOPIC,SEQ"/>
+    </table>
+    <table name="PRODUCT_PRIVS" schema="SYSTEM" catalog="" type="VIEW">
+      <column name="PRODUCT" sqlType="VARCHAR2" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="USERID" sqlType="VARCHAR2" precision="30" scale="0" nullable="true" jdbcType="12"/>
+      <column name="ATTRIBUTE" sqlType="VARCHAR2" precision="240" scale="0" nullable="true" jdbcType="12"/>
+      <column name="SCOPE" sqlType="VARCHAR2" precision="240" scale="0" nullable="true" jdbcType="12"/>
+      <column name="NUMERIC_VALUE" sqlType="NUMBER" precision="15" scale="2" nullable="true" jdbcType="3"/>
+      <column name="CHAR_VALUE" sqlType="VARCHAR2" precision="240" scale="0" nullable="true" jdbcType="12"/>
+      <column name="DATE_VALUE" sqlType="DATE" precision="7" scale="0" nullable="true" jdbcType="93"/>
+      <column name="LONG_VALUE" sqlType="LONG" precision="0" scale="0" nullable="true" jdbcType="-1"/>
+    </table>
+    <procedure name="DRIVER" schema="JMIRANDILLA" catalog="" type="1" remarks="U3RhbmRhbG9uZSBwcm9jZWR1cmUgb3IgZnVuY3Rpb24="/>
+    <procedure name="EMPBYSSN" schema="JMIRANDILLA" catalog="" type="1" remarks="U3RhbmRhbG9uZSBwcm9jZWR1cmUgb3IgZnVuY3Rpb24=">
+      <prototype>
+        <parameter name="V_SSN" sqlType="VARCHAR2" precision="32767" scale="0" nullable="true" jdbcType="12" type="1" index="0"/>
+      </prototype>
+    </procedure>
+    <procedure name="GETBDATE" schema="JMIRANDILLA" catalog="" type="2" remarks="U3RhbmRhbG9uZSBwcm9jZWR1cmUgb3IgZnVuY3Rpb24=">
+      <prototype>
+        <parameter name="V_SSN" sqlType="VARCHAR2" precision="32767" scale="0" nullable="true" jdbcType="12" type="1" index="1"/>
+        <parameter name="" sqlType="DATE" precision="0" scale="0" nullable="true" jdbcType="93" type="5" index="0"/>
+      </prototype>
+    </procedure>
+    <procedure name="INSERTY" schema="JMIRANDILLA" catalog="" type="1" remarks="U3RhbmRhbG9uZSBwcm9jZWR1cmUgb3IgZnVuY3Rpb24="/>
+    <procedure name="LISTDEPENDENT" schema="JMIRANDILLA" catalog="" type="1" remarks="U3RhbmRhbG9uZSBwcm9jZWR1cmUgb3IgZnVuY3Rpb24="/>
+    <procedure name="LISTEMP" schema="JMIRANDILLA" catalog="" type="1" remarks="U3RhbmRhbG9uZSBwcm9jZWR1cmUgb3IgZnVuY3Rpb24="/>
+    <procedure name="PHOURS" schema="JMIRANDILLA" catalog="" type="1" remarks="U3RhbmRhbG9uZSBwcm9jZWR1cmUgb3IgZnVuY3Rpb24=">
+      <prototype>
+        <parameter name="PN" sqlType="NUMBER" precision="22" scale="0" nullable="true" jdbcType="3" type="1" index="0"/>
+      </prototype>
+    </procedure>
+    <procedure name="TOOMUCH" schema="JMIRANDILLA" catalog="" type="1" remarks="U3RhbmRhbG9uZSBwcm9jZWR1cmUgb3IgZnVuY3Rpb24="/>
+    <procedure name="DELETEDEP" schema="JMIRANDILLA" catalog="" type="1" package="DEP_PACKAGE" remarks="UGFja2FnZWQgcHJvY2VkdXJl">
+      <prototype>
+        <parameter name="NAME" sqlType="VARCHAR2" precision="32767" scale="0" nullable="true" jdbcType="12" type="1" index="0"/>
+      </prototype>
+    </procedure>
+    <procedure name="INSERTDEP" schema="JMIRANDILLA" catalog="" type="1" package="DEP_PACKAGE" remarks="UGFja2FnZWQgcHJvY2VkdXJl"/>
+    <procedure name="NDAY" schema="JMIRANDILLA" catalog="" type="2" package="DEP_PACKAGE" remarks="UGFja2FnZWQgZnVuY3Rpb24=">
+      <prototype>
+        <parameter name="" sqlType="DATE" precision="0" scale="0" nullable="true" jdbcType="93" type="5" index="0"/>
+      </prototype>
+    </procedure>
+  </data-source>
+</component>
